@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+
+{%block title%} {{recipe.title}} {%endblock%}
+
+{%block content%}
+
+<div class="button-group">
+  <a href="{%url 'recipes:ing_create' recipe.slug%}" class="btn btn-dark mb-4 mt-3 {%if request.user != recipe.author and not request.user.is_superuser%} disabled {%endif%}">Add ingredient</a>
+  <a href="{%url 'recipes:list'%}" class="btn btn-dark mb-4 mt-3">Back to recipe list</a>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">{{recipe.title}}</h5>
+    <p class="card-text">{{recipe.author}}</p>
+    <div class="button-group mb-3">
+      {%for tag in recipe.tags.all%}
+        <a href="#" class="btn btn-outline-dark btn-sm">{{tag.title}}</a>
+      {%endfor%}
+    </div>
+    <a href="{%url 'recipes:update' recipe.slug%}" class="btn btn-light {%if request.user != recipe.author and not request.user.is_superuser%} disabled {%endif%}">Edit</a>
+    <a href="{%url 'recipes:delete' recipe.slug%}" class="btn btn-danger {%if request.user != recipe.author and not request.user.is_superuser%} disabled {%endif%}">Delete</a>
+  </div>
+  <div class="card-footer text-muted">
+    {{recipe.created_date}}
+  </div>
+</div>
+
+<div class="row mt-4">
+  {%for ingredient in recipe.ingredients.all%}
+
+    <div class="col-sm-6 mb-3 mb-sm-0">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ingredient.title}}</h5>
+          <p class="card-text">{{ingredient.quantity}} - {{ingredient.get_unit_display.lower}}</p>
+          <a href="{%url 'recipes:ing_update' ingredient.recipe.slug ingredient.id%}" class="btn btn-light {%if request.user != recipe.author and not request.user.is_superuser%} disabled {%endif%}">Edit</a>
+          <a href="{%url 'recipes:ing_delete' ingredient.recipe.slug ingredient.id%}" class="btn btn-danger {%if request.user != recipe.author and not request.user.is_superuser%} disabled {%endif%}">Delete</a>
+        </div>
+        <div class="card-footer text-muted">
+          {{ingredient.created_date}}
+        </div>
+      </div>
+    </div>
+
+  {%endfor%}
+</div>
+
+{%endblock%}

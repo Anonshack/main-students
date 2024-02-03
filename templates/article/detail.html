@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+
+{%block title%} {{object.title}} {%endblock%}
+
+{%block content%}
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <h1>{{object.title}}</h1>
+            <p>{{object.content}}</p>
+            <div class="mb-3">
+                <a href="{%url 'articles:edit' object.slug%}">
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </a>
+                <a href="{%url 'articles:delete' object.slug%}">
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </a>
+            </div>
+            <code>{{object.created_date}}</code>
+            <br>
+            <code>{{object.modified_date}}</code>
+        </div>
+        <div class="col-md-9">
+            {%if object.image%}
+        <div>
+                    <img src="{{object.image.url}}" alt="">
+                </div>
+            {%endif%}
+        </div>
+    </div>
+</div>
+{%endblock%}

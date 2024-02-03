@@ -1,0 +1,42 @@
+{%load static%}
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{%url 'articles:list'%}">
+        <img src="{%static 'image/logo.png'%}" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{%url 'articles:list'%}">Article</a>
+        </li>
+          <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{%url 'blogs:list'%}">Blogs</a>
+          </li>
+          <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{%url 'recipes:list'%}">Recipes</a></li>
+            <li><a class="dropdown-item" href="{%url 'recipes:tag_list'%}">Tags</a></li>
+          </ul>
+        </li>
+      </ul>
+      <div>
+        {%if request.user.is_authenticated%}
+            <span>{{request.user}}</span>
+            <a href="{%url 'account:logout'%}">
+                <button type="submit" class="btn btn-dark">logout</button>
+            </a>
+        {%else%}
+            <a href="{%url 'account:login'%}">
+                <button type="submit" class="btn btn-dark">login</button>
+            </a>
+        {%endif%}
+    </div>
+    </div>
+  </div>
+</nav>

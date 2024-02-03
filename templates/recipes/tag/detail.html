@@ -1,0 +1,18 @@
+{%extends 'base.html'%}
+
+{%block title%} Tag detail {%endblock%}
+
+{%block content%}
+
+<div class="button-group">
+    <a href="{%url 'recipes:tag_list'%}" class="btn btn-link">Back to tag list</a>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{object.title}}</h5>
+        <a href="{%url 'recipes:tag_update' object.id%}" class="btn btn-light">Edit</a>
+        <a href="{%url 'recipes:tag_delete' object.id%}" class="btn btn-danger">Delete</a>
+    </div>
+</div>
+
+{%endblock%}

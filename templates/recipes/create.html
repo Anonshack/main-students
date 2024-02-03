@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+
+{%block title%} Recipe create {%endblock%}
+
+{%block content%}
+<form method="post">
+  {%csrf_token%}
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <span class="text-danger">{{form.title.errors}}</span>      {{form.title}}
+    </div>
+    <div class="mb-3 form-check">
+      <label class="form-check-label" for="tags">Tags</label>
+      {{form.tags}}
+    </div>
+    <div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</form>
+{%endblock%}

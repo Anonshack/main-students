@@ -1,0 +1,41 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<div class="pt-2">
+    <a href="{%url 'articles:create'%}"><button class="btn btn-primary">Add new article</button></a>
+</div>
+
+<br>
+
+<div>
+    <form action="{%url 'articles:list'%}" class="search-form">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <input class="form-control me-2" type="search" name="q" placeholder="search" autocomplete="off">
+                    </div>
+                    <div class="col-auto">
+                        <input type="submit" value="search" class="btn btn-outline-success">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<ul class="pt-4">
+    {%for object in object_list%}
+        <li class="pt-2">
+            <a href="{%url 'articles:detail' object.slug%}">{{object.title}}</a>
+            <a href="{%url 'articles:edit' object.slug%}">
+                <button type="submit" class="btn btn-outline-primary">Edit</button>
+            </a>
+            <a href="{%url 'articles:delete' object.slug%}">
+                <button type="submit" class="btn btn-outline-danger">Delete</button>
+            </a>
+        </li>
+    {%endfor%}
+</ul>
+
+{%endblock%}

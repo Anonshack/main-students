@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+
+{%block title%} Delete {{object.title}} {%endblock%}
+
+{%block content%}
+<form method="post">
+    {%csrf_token%}
+        <h1>{{object.title}} is going to be deleted</h1>
+        <p>Are you sure?</p>
+        <div>
+            <button type="submit" class="btn btn-outline-danger">Yes</button>
+            <a href="{%url 'articles:list'%}">
+                <button type="button" class="btn btn-outline-secondary">No</button>
+            </a>
+        </div>
+</form>
+{%endblock%}

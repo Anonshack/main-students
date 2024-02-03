@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%block title%} Register {%endblock%}
+
+{%block content%}
+
+<h1>Creating a new user</h1>
+    <form method="post">
+        {%csrf_token%}
+        <div>
+            <label class="pt-4" for="id_username">Username:</label> {{form.username}}
+        </div>
+        <div>
+            <label class="pt-4" for="id_password1">Password:</label> {{form.password1}}
+        </div>
+        <div>
+            <label class="pt-4" for="id_password2">Verify password:</label> {{form.password2}}
+        </div>
+        <div class="pt-4">
+            <button class="btn btn-primary" type="submit">Add</button>
+        </div>
+    </form>
+    <p class="pt-4">
+        If you have an account then move to <a href="{%url 'account:login'%}">login</a> to log in
+    </p>
+
+{%endblock%}

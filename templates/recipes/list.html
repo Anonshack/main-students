@@ -1,0 +1,53 @@
+{%extends 'base.html'%}
+
+{%block title%} Recipe list {%endblock%}
+
+{%block content%}
+
+<div>
+    <a href="{%url 'recipes:create'%}" class="btn btn-link">Add new recipe</a>
+</div>
+
+<div class="search-div mt-3">
+    <form action="{%url 'recipes:list'%}" class="search-form">
+        <div class="row g-3 align-items-center">
+            <div class="col-auto">
+                <input type="search" autocomplete="off" class="form-control" id="exampleFormControlInput2" placeholder="search.." name="q">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-9">
+            <div>
+                <a href="{%url 'recipes:my_list'%}" class="btn btn-outline-dark mb-4">My recipes</a>
+            </div>
+            {%for recipe in recipes%}
+
+                <ol class="list-group list-group-numbered">
+                  <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                      <div class="fw-bold"><a href="{%url 'recipes:detail' recipe.slug%}">{{recipe.title}}</a></div>
+                        {{recipe.author}}
+                    </div>
+                    <span class="badge bg-primary rounded-pill">{{recipe.ingredients.count}}</span>
+                  </li>
+                </ol>
+
+            {%endfor%}
+        </div>
+        <div class="col-md-3">
+            {%for tag in tags_list%}
+                <a href="?tag=" class="btn btn-outline-dark m-2">All tags</a>
+                <a href="?tag={{tag.title}}" class="btn btn-outline-dark">{{tag.title}}</a>
+            {%endfor%}
+        </div>
+    </div>
+</div>
+
+{%endblock%}
